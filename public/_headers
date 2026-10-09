@@ -1,0 +1,8 @@
+# Cabeceras para Cloudflare Pages (y Netlify).
+# Los archivos de /assets llevan hash en el nombre: se pueden cachear para siempre.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Vídeos y pósteres de los juegos: un mes en caché, para no servirlos dos veces al mismo visitante.
+/games/*
+  Cache-Control: public, max-age=2592000

@@ -1,0 +1,368 @@
+/* Identidad: tinta, hueso y una sola señal. Los puntos 3D leen estos mismos tokens. */
+:root {
+  color-scheme: dark;
+
+  --ink: #07080b;
+  --ink-soft: #10121a;
+  --bone: #edeae2;
+  --bone-dim: rgba(237, 234, 226, 0.74);
+  --mute: #8a8d98;
+  --line: rgba(237, 234, 226, 0.14);
+  --line-strong: rgba(237, 234, 226, 0.32);
+  --signal: #ff5433;
+  --cold: #8ea2ff;
+
+  --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  --gutter: clamp(1.25rem, 6.5vw, 6.5rem);
+  --column: 34rem;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+strong {
+  color: var(--bone);
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 4px;
+}
+
+/* Capas fijas: escena (0) · velo (1) · contenido (2) · interfaz (5) · grano (6) */
+
+.veil {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(7, 8, 11, 0.78) 0%, rgba(7, 8, 11, 0.4) 36%, rgba(7, 8, 11, 0) 58%);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main {
+  position: relative;
+  z-index: 2;
+}
+
+/* Secciones */
+
+.section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 7.5rem var(--gutter);
+}
+
+.section__body {
+  width: min(100%, var(--column));
+}
+
+.section__body--wide {
+  --column: 46rem;
+}
+
+.label,
+.kicker {
+  font: 500 0.7rem/1.4 var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  color: var(--signal);
+}
+
+.kicker__number {
+  margin-right: 0.9rem;
+  padding-right: 0.9rem;
+  border-right: 1px solid var(--line-strong);
+  color: var(--bone);
+}
+
+.title {
+  margin: 1.1rem 0 1.3rem;
+  font: 700 clamp(2.4rem, 5.4vw, 4.6rem) / 0.94 var(--font-display);
+  font-stretch: 84%;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.title--small {
+  margin-top: 0;
+  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  color: var(--bone-dim);
+  font-size: 1.06rem;
+  line-height: 1.6;
+}
+
+.bullets {
+  margin-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.bullets li {
+  position: relative;
+  padding: 0.9rem 0 0.9rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--bone-dim);
+  font-size: 0.96rem;
+  line-height: 1.5;
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  top: 1.42rem;
+  left: 0.1rem;
+  width: 0.38rem;
+  height: 0.38rem;
+  background: var(--signal);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.9rem 1.3rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  font: 500 0.74rem/1 var(--font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition:
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    color 0.35s var(--ease);
+}
+
+.button > span {
+  transition: transform 0.35s var(--ease);
+}
+
+.button:hover:not(:disabled) {
+  border-color: var(--signal);
+  background: var(--signal);
+  color: var(--ink);
+}
+
+.button:hover:not(:disabled) > span {
+  transform: translate(2px, -2px);
+}
+
+.button:disabled {
+  cursor: default;
+  color: var(--mute);
+}
+
+.button--solid {
+  border-color: var(--bone);
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  padding: 0.34rem 0.62rem;
+  border: 1px solid var(--line);
+  border-radius: 0.35rem;
+  background: rgba(7, 8, 11, 0.5);
+  color: var(--bone-dim);
+  font: 400 0.74rem/1.25 var(--font-mono);
+}
+
+.tag--hot {
+  border-color: rgba(255, 84, 51, 0.5);
+  color: var(--bone);
+}
+
+/* Aparición escalonada (directiva v-reveal) */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(1.4rem);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.is-in [data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Arrastrar para girar la forma */
+
+@media (hover: hover) and (pointer: fine) {
+  main {
+    cursor: grab;
+  }
+
+  .section__body,
+  .hero__body {
+    cursor: auto;
+  }
+}
+
+.is-grabbing,
+.is-grabbing * {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+/* Vertical: la forma arriba, el texto en una tarjeta debajo */
+
+@media (max-width: 760px) {
+  .veil {
+    background: linear-gradient(180deg, rgba(7, 8, 11, 0) 34%, rgba(7, 8, 11, 0.55) 64%);
+  }
+
+  .section {
+    align-items: flex-end;
+    padding: 50svh 1rem 4.5rem;
+  }
+
+  .section__body {
+    padding: 1.4rem 1.25rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: 1.1rem;
+    background: rgba(7, 8, 11, 0.74);
+  }
+}
+
+/* Modo lectura: el CV ocupa la pantalla y el portfolio no se desplaza por debajo. */
+
+.is-reading {
+  overflow: hidden;
+}
+
+/* Al imprimir, desde cualquier vista, sale el CV en plano. */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 11mm 14mm;
+  }
+
+  /* Sin esto, el esquema oscuro tiñe los márgenes de la página. */
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  #app > :not(.cv) {
+    display: none !important;
+  }
+
+  #app > .cv {
+    display: block !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
