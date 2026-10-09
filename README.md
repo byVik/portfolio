@@ -101,8 +101,8 @@ dirección absoluta para mostrar la imagen de vista previa.
 | ---------- | --------- | ------------------------------------------------- |
 | `--ink`    | `#07080b` | Fondo                                             |
 | `--bone`   | `#edeae2` | Texto y puntos cálidos                            |
-| `--cold`   | `#8ea2ff` | Puntos fríos (profundidad)                        |
-| `--signal` | `#ff5433` | Único acento: etiquetas, cifras y lo que se mueve |
+| `--cold`   | `#25a585` | Puntos fríos (profundidad)                        |
+| `--signal` | `#2ccfc0` | Único acento: etiquetas, cifras y lo que se mueve |
 
 - **Bricolage Grotesque** condensada para titulares, **Instrument Sans** para el texto y **JetBrains Mono** para
   etiquetas y datos.

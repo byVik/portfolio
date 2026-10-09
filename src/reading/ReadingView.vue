@@ -112,8 +112,8 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   --paper-ink: #14151a;
   --paper-dim: rgba(20, 21, 26, 0.78);
   --paper-line: rgba(20, 21, 26, 0.16);
-  /* El bermellón, oscurecido para que se lea sobre claro. */
-  --paper-signal: #c2351a;
+  /* El acento, oscurecido para que se lea sobre claro. */
+  --paper-signal: #0b6e68;
 
   position: fixed;
   inset: 0;

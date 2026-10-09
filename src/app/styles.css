@@ -9,8 +9,8 @@
   --mute: #8a8d98;
   --line: rgba(237, 234, 226, 0.14);
   --line-strong: rgba(237, 234, 226, 0.32);
-  --signal: #ff5433;
-  --cold: #8ea2ff;
+  --signal: #2ccfc0;
+  --cold: #25a585;
 
   --font-display: 'Bricolage Grotesque Variable', 'Arial Narrow', system-ui, sans-serif;
   --font-body: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -262,7 +262,7 @@ main {
 }
 
 .tag--hot {
-  border-color: rgba(255, 84, 51, 0.5);
+  border-color: color-mix(in srgb, var(--signal) 50%, transparent);
   color: var(--bone);
 }
 
