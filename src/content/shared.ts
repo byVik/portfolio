@@ -4,10 +4,12 @@ import type { Game, ProfileLink } from './types'
 
 export const name = { firstName: 'Viktor', lastName: 'Strohush Loyish' }
 
+export const linkedin = 'https://www.linkedin.com/in/viktor-strohush-loyish'
+
 export const links: ProfileLink[] = [
   {
     label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/viktor-strohush-loyish',
+    href: linkedin,
     handle: 'linkedin.com/in/viktor-strohush-loyish',
   },
   { label: 'GitHub', href: 'https://github.com/byVik', handle: 'github.com/byVik' },

@@ -36,7 +36,12 @@ const points = computed(() => new Intl.NumberFormat(content.value.locale))
           {{ link.label }} <span aria-hidden="true">↗</span>
         </a>
       </div>
-      <dl class="contact__extras" data-reveal style="--i: 5">
+      <p class="contact__cv" data-reveal style="--i: 5">
+        <a class="label" :href="content.profile.linkedin" target="_blank" rel="noopener">
+          {{ content.ui.fullCv }} <span aria-hidden="true">↗</span>
+        </a>
+      </p>
+      <dl class="contact__extras" data-reveal style="--i: 6">
         <div v-for="(extra, i) in content.extras" :key="i">
           <dt class="label">{{ extra.label }}</dt>
           <dd v-for="line in extra.lines" :key="line">{{ line }}</dd>
@@ -53,6 +58,19 @@ const points = computed(() => new Intl.NumberFormat(content.value.locale))
 <style scoped>
 .contact {
   padding-bottom: 8rem;
+}
+
+.contact__cv {
+  margin-top: 1.2rem;
+}
+
+.contact__cv a {
+  color: var(--signal);
+  transition: color 0.3s var(--ease);
+}
+
+.contact__cv a:hover {
+  color: var(--bone);
 }
 
 .contact__extras {

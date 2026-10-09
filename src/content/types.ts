@@ -63,6 +63,8 @@ export interface Content {
     location: string
     availability: string
     remote: string
+    /** Dónde se pide el CV completo. */
+    linkedin: string
     links: ProfileLink[]
   }
   chapters: Chapter[]
@@ -111,6 +113,8 @@ export interface Content {
     hud: { shape: string; points: string; visible: string; hint: string }
     footer: string
     footerPoints: string
-    cv: { open: string; close: string; print: string; download: string; file: string }
+    /** Invitación a pedir el CV completo, en la sección de contacto. */
+    fullCv: string
+    cv: { open: string; close: string; print: string; download: string; file: string; summaryNote: string }
   }
 }

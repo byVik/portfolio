@@ -1,4 +1,4 @@
-import { games, links, name, orderflowUrl, problems, tech } from './shared'
+import { games, linkedin, links, name, orderflowUrl, problems, tech } from './shared'
 import type { Content } from './types'
 
 export const es: Content = {
@@ -18,6 +18,7 @@ export const es: Content = {
     location: 'Madrid, España',
     availability: 'Disponible 100 % en remoto',
     remote: '100 % remoto',
+    linkedin,
     links,
   },
   chapters: [
@@ -219,6 +220,7 @@ export const es: Content = {
     pauseVideo: 'Pausar el vídeo',
     hud: { shape: 'Forma', points: 'Puntos', visible: 'Visibles', hint: 'Arrastra para girar · clic para un pulso' },
     footer: 'Vue 3, TypeScript y Three.js',
+    fullCv: '¿Necesitas el CV completo? Pídemelo por LinkedIn',
     footerPoints: 'puntos, ninguna plantilla',
     cv: {
       open: 'CV',
@@ -226,6 +228,7 @@ export const es: Content = {
       print: 'Imprimir',
       download: 'Descargar PDF',
       file: 'cv-viktor-strohush-loyish-es.pdf',
+      summaryNote: 'Esto es un resumen. El CV completo, con datos de contacto, pídemelo por LinkedIn',
     },
   },
 }

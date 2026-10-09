@@ -57,6 +57,9 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
             · <a :href="link.href">{{ link.handle }}</a>
           </template>
         </p>
+        <p class="cv__note">
+          <a :href="content.profile.linkedin">{{ content.ui.cv.summaryNote }} <span aria-hidden="true">↗</span></a>
+        </p>
       </header>
 
       <section v-for="chapter in content.chapters" :key="chapter.id" class="cv__block">
@@ -197,6 +200,15 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 .cv__contact {
   margin-top: 0.6rem;
   font: 400 0.76rem/1.6 var(--font-mono);
+}
+
+.cv p.cv__note {
+  margin-top: 0.8rem;
+  font: 500 0.74rem/1.5 var(--font-mono);
+}
+
+.cv__note a {
+  color: var(--paper-signal);
 }
 
 .cv a {
@@ -361,6 +373,11 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   .cv p.cv__kicker,
   .cv__stack dt {
     font-size: 6.4pt;
+  }
+
+  .cv p.cv__note {
+    margin-top: 4pt;
+    font-size: 7.2pt;
   }
 
   .cv ul {
