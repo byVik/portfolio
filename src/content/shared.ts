@@ -59,7 +59,7 @@ export const games = {
   },
   zoomieDash: {
     id: 'zoomie-dash',
-    name: 'ZOOMIE DASH',
+    name: 'Zoomie Dash',
     tech: ['Three.js', 'TypeScript', 'Vite', 'Blender', 'Capacitor'],
     status: 'development',
     links: [],
@@ -73,7 +73,7 @@ export const games = {
   },
   drawDash: {
     id: 'draw-dash',
-    name: 'DRAW DASH',
+    name: 'Draw Dash',
     tech: ['TypeScript', 'Canvas 2D', 'WebAudio', 'Vite'],
     status: 'development',
     links: [],
