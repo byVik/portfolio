@@ -16,6 +16,7 @@ npm run lint           # ESLint
 npm run format         # Prettier (escribe); format:check solo comprueba
 npm run build          # comprobación de tipos + build en dist/
 npm run export         # regenera public/og.jpg y los PDF del CV
+npm run deploy         # build + despliegue en Cloudflare (viktorstrohush.dev)
 ```
 
 Antes de dar un cambio por terminado: `npm run lint`, `npm run format:check`, `npm test` y `npm run build` en verde.

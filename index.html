@@ -17,7 +17,9 @@
       property="og:description"
       content="Tomo la forma del problema: Java, Vue 3, Qt/C++ y desarrollo con IA, del análisis a producción."
     />
-    <!-- Las redes exigen una URL absoluta para la imagen: define VITE_SITE_URL en .env antes del build. -->
+    <link rel="canonical" href="%VITE_SITE_URL%/" />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <!-- Las redes exigen una URL absoluta para la imagen: sale de VITE_SITE_URL, en .env. -->
     <meta property="og:image" content="%VITE_SITE_URL%/og.jpg" />
     <meta property="og:image:width" content="1600" />
     <meta property="og:image:height" content="840" />

@@ -89,11 +89,16 @@ Después de cambiar el contenido, `npm run export` actualiza los PDF.
 
 ## Publicar
 
-`dist/` es estático y usa rutas relativas: sirve tal cual en Cloudflare Pages, GitHub Pages o Netlify
-(comando de build `npm run build`, directorio `dist`).
+Está publicado en **[viktorstrohush.dev](https://viktorstrohush.dev)**, en Cloudflare Workers como sitio estático
+(`wrangler.jsonc`): sin servidor ni código en el borde, solo los archivos de `dist/`.
 
-Antes del build de producción, pon la URL pública en `.env` (`VITE_SITE_URL`): las redes sociales necesitan una
-dirección absoluta para mostrar la imagen de vista previa.
+```bash
+npm run deploy         # build + wrangler deploy (pide haber hecho antes `npx wrangler login`)
+```
+
+La URL pública vive en `.env` (`VITE_SITE_URL`) y de ella salen la dirección canónica y la imagen de vista previa
+que muestran las redes al compartir el enlace. `public/_headers` fija la caché de los archivos con hash y de los
+vídeos.
 
 ## Identidad visual
 
