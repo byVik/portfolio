@@ -1,114 +1,134 @@
-# Portfolio · Viktor Strohush Loyish
+# Viktor Strohush Loyish · Portfolio
 
-Portfolio 3D interactivo. La idea que lo sostiene es **«Tomo la forma del problema»**: 36 000 puntos que, al hacer
-scroll, se reorganizan en una forma distinta para cada etapa de mi carrera.
+[![CI](https://github.com/byVik/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/byVik/portfolio/actions/workflows/ci.yml)
 
-| Sección       | Forma    | Por qué                                             | Lo que se mueve              |
-| ------------- | -------- | --------------------------------------------------- | ---------------------------- |
-| Inicio        | Nube     | El ruido del que parte todo                         |                              |
-| Perfil        | Retícula | El ruido, ordenado                                  | Señales entre nodos          |
-| Volinga       | Armazón  | Cae el 80 % de los puntos: el código que sobraba    |                              |
-| Volinga Suite | Plató    | Pared de paneles y cámara: la industria audiovisual |                              |
-| Pipeline      | Pipeline | Tests → build → instalador → firma                  | Paquetes cruzando las etapas |
-| Arquimea      | Globo    | Pedidos en casi todos los aeropuertos de España     | Vuelos desde Madrid          |
-| Móvil         | Pelota   | La app del Mutua Madrid Open                        |                              |
-| IA            | Órbita   | Agentes girando alrededor de un núcleo              | Los agentes                  |
-| OrderFlow     | Hexágono | Arquitectura hexagonal                              | Eventos por los adaptadores  |
-| Juegos        | Mando    | Fuera del trabajo también hago juegos               | Pulsaciones en los botones   |
-| Stack         | Capas    | El stack, apilado                                   | Peticiones entre capas       |
-| Contacto      | Tu texto | Escribes tu problema y los puntos lo dibujan        |                              |
+**Live at [viktorstrohush.dev](https://viktorstrohush.dev/?lang=en)** · [Leer en español](README.es.md)
 
-## Qué se puede hacer
+An interactive 3D portfolio built around one idea: **“I take the shape of the problem.”** As you scroll, 36,000
+points rearrange into a different shape for each stage of my career.
 
-- **Scroll**: transforma una forma en la siguiente.
-- **Ratón**: los puntos se apartan del cursor; arrastrar gira la forma; un clic lanza una onda.
-- **Antes / Después** (Volinga): devuelve a la escena el código muerto y lo vuelve a podar.
-- **Ejecutar pipeline**: un pulso recorre las cuatro etapas y las va marcando.
-- **¿Qué forma tiene tu problema?**: el texto que escribas se convierte en la forma final.
-- **ES / EN**: todo el contenido en dos idiomas; `?lang=en` abre directamente en inglés.
-- **Juegos**: una ficha por juego con vídeo de partida, estado y enlaces cuando está publicado.
-- **CV**: modo lectura en plano, imprimible y con PDF descargable; `?cv=1` lo abre directamente.
+[![Opening screen of the portfolio](docs/readme/hero-en.jpg)](https://viktorstrohush.dev/?lang=en)
 
-Sin WebGL el contenido sigue siendo legible, con `prefers-reduced-motion` la escena se calma, y en equipos lentos
-baja sola el número de puntos.
+|                          Lattice                           |                                Globe                                |                             Orbit                             |                          Hexagon                           |
+| :--------------------------------------------------------: | :-----------------------------------------------------------------: | :-----------------------------------------------------------: | :--------------------------------------------------------: |
+| ![Points forming a cubic lattice](docs/readme/lattice.jpg) | ![Points forming a globe with flight routes](docs/readme/globe.jpg) | ![Points forming orbits around a core](docs/readme/orbit.jpg) | ![Points forming nested hexagons](docs/readme/hexagon.jpg) |
+|                    Noise, put in order                     |                   Orders across Spain’s airports                    |                    AI agents around a core                    |                   Hexagonal architecture                   |
 
-## Stack
+## What you can do
 
-Vue 3 (Composition API) · TypeScript · Three.js · Vite · Vitest · ESLint · Prettier · GitHub Actions.
-Sin librerías de UI ni de animación.
+- **Scroll** to morph one shape into the next.
+- **Move the mouse** and the points step aside; **drag** to rotate the shape; **click** for a shockwave.
+- **Before / After** (Volinga): bring the dead code back into the scene, then prune it again. 80% of the points fall.
+- **Run pipeline**: a pulse travels through tests, build, installer and signing, ticking each stage off.
+- **What shape is your problem?** Type a word and the points draw it.
+- **ES / EN**: all the content in two languages. `?lang=en` opens straight in English.
+- **Games**: a card per game with gameplay video, status and, once published, links.
+- **CV**: a plain reading mode, printable, with a downloadable PDF. `?cv=1` opens it directly.
 
-## Uso
+It degrades on purpose: without WebGL the content is still fully readable, `prefers-reduced-motion` calms the scene,
+and slower machines automatically get fewer points.
 
-```bash
-npm install
-npm run dev            # desarrollo
-npm test               # tests unitarios
-npm run lint           # ESLint
-npm run format         # Prettier
-npm run build          # comprobación de tipos + build estático en dist/
-npm run export         # regenera los PDF del CV y la imagen de vista previa (necesita Edge o Chrome)
-```
+## One shape per chapter
 
-## Cómo está organizado
+| Section       | Shape     | Why                                                 | What moves                  |
+| ------------- | --------- | --------------------------------------------------- | --------------------------- |
+| Home          | Cloud     | The noise everything starts from                    |                             |
+| Profile       | Lattice   | The noise, put in order                             | Signals between nodes       |
+| Volinga       | Frame     | 80% of the points fall: the code that was spare     |                             |
+| Volinga Suite | Stage     | A panel wall and a camera: the audiovisual industry |                             |
+| Pipeline      | Pipeline  | Tests → build → installer → signing                 | Packets crossing the stages |
+| Arquimea      | Globe     | Orders in almost every airport in Spain             | Flights out of Madrid       |
+| Mobile        | Ball      | The Mutua Madrid Open app                           |                             |
+| AI            | Orbit     | Agents circling a core                              | The agents                  |
+| OrderFlow     | Hexagon   | Hexagonal architecture                              | Events through the adapters |
+| Games         | Gamepad   | Outside work, I also make games                     | Button presses              |
+| Stack         | Layers    | The stack, stacked                                  | Requests between layers     |
+| Contact       | Your text | You type your problem and the points draw it        |                             |
 
-Por dominio, no por tipo de archivo:
+## How it is built
+
+The code is organized by domain, not by file type:
 
 ```
 src/
-  app/        Composición de la página, cabecera y tokens de la identidad visual
-  content/    El CV, sus dos idiomas y el idioma activo
-  scene/      La escena 3D
-    model/      Lógica pura y testeada: formas, recorridos, scroll, rotación, calidad
-    engine/     Three.js: renderizado y shaders
-    ui/         Vue: lienzo, gestos, HUD y el puente con el resto de la página
-  story/      Las secciones del recorrido y sus controles
-  reading/    Modo lectura
-  shared/     Utilidades sin dominio
-specs/        Especificaciones
-scripts/      Exportación de PDF e imagen de vista previa
+  app/        Page composition, header and the visual identity tokens
+  content/    The CV, its two languages and the active locale
+  scene/      The 3D scene
+    model/      Pure, unit-tested logic: shapes, paths, scroll, rotation, quality
+    engine/     Three.js: rendering and shaders
+    ui/         Vue: canvas, gestures, HUD and the bridge to the rest of the page
+  story/      The sections of the scroll story and their controls
+  reading/    Reading mode
+  shared/     Utilities with no domain
+specs/        Specifications
+scripts/      PDF, preview image and README screenshot export
 ```
 
-Las fronteras se comprueban con ESLint: Three.js solo se importa desde `scene/engine`, y entre dominios se usa el
-alias `@/`.
+- **Pure core.** Everything in `scene/model` is plain TypeScript with no Three.js, Vue or DOM, and is covered by
+  unit tests.
+- **One door into Three.js.** Only `scene/engine` imports it, and the rest of the page talks to the scene through a
+  single bridge, `scene/ui/controls.ts`.
+- **Boundaries are enforced, not agreed.** ESLint fails CI if Three.js is imported anywhere else or if a domain
+  reaches into another with relative paths.
+- **No UI or animation libraries.** Vue 3, TypeScript, Three.js and hand-written CSS and GLSL.
+- **Text first.** Three.js is loaded lazily, so the content paints before the scene arrives.
 
 ## Spec Driven Development
 
-El comportamiento se escribe primero en [`specs/`](specs/README.md) como requisitos numerados; los tests citan el
-id del requisito que comprueban (`describe('ESC-07 · calidad adaptativa')`) y después llega el código. Las reglas
-para trabajar en el repositorio, con o sin agentes de IA, están en [`AGENTS.md`](AGENTS.md).
+Behaviour is written first in [`specs/`](specs/README.md) as numbered requirements. Tests cite the id of the
+requirement they check, for example `describe('ESC-07 · calidad adaptativa')`, and the code comes last. The rules for
+working in this repository, with or without AI agents, are in [`AGENTS.md`](AGENTS.md).
 
-## Editar el contenido
+Specs, comments and commit history are in Spanish; identifiers are in English.
 
-- Un texto: `src/content/es.ts` y `src/content/en.ts`.
-- Un enlace o una tecnología: `src/content/shared.ts`.
-- Un juego: ver [specs/05-juegos.md](specs/05-juegos.md).
-- Una sección nueva: un capítulo en los dos idiomas y una escena con el mismo `id` en `src/scene/model/scenes.ts`.
-  Un test avisa si no coinciden.
+## Tech stack
 
-Después de cambiar el contenido, `npm run export` actualiza los PDF.
+Vue 3 (Composition API) · TypeScript · Three.js · Vite · Vitest · ESLint · Prettier · GitHub Actions ·
+Cloudflare Workers
 
-## Publicar
-
-Está publicado en **[viktorstrohush.dev](https://viktorstrohush.dev)**, en Cloudflare Workers como sitio estático
-(`wrangler.jsonc`): sin servidor ni código en el borde, solo los archivos de `dist/`.
+## Run it locally
 
 ```bash
-npm run deploy         # build + wrangler deploy (pide haber hecho antes `npx wrangler login`)
+npm install
+npm run dev            # development server
+npm test               # unit tests
+npm run lint           # ESLint
+npm run format         # Prettier
+npm run build          # type check + static build in dist/
+npm run export         # regenerates the CV PDFs, the social preview and the README screenshots (needs Edge or Chrome)
 ```
 
-La URL pública vive en `.env` (`VITE_SITE_URL`) y de ella salen la dirección canónica y la imagen de vista previa
-que muestran las redes al compartir el enlace. `public/_headers` fija la caché de los archivos con hash y de los
-vídeos.
+## Editing the content
 
-## Identidad visual
+- A text: `src/content/es.ts` and `src/content/en.ts`.
+- A link or a technology: `src/content/shared.ts`.
+- A game: see [specs/05-juegos.md](specs/05-juegos.md).
+- A new section: a chapter in both languages and a scene with the same `id` in `src/scene/model/scenes.ts`. A test
+  fails if they do not match.
 
-| Token      | Valor     | Uso                                               |
-| ---------- | --------- | ------------------------------------------------- |
-| `--ink`    | `#07080b` | Fondo                                             |
-| `--bone`   | `#edeae2` | Texto y puntos cálidos                            |
-| `--cold`   | `#25a585` | Puntos fríos (profundidad)                        |
-| `--signal` | `#2ccfc0` | Único acento: etiquetas, cifras y lo que se mueve |
+After changing the content, `npm run export` updates the PDFs.
 
-- **Bricolage Grotesque** condensada para titulares, **Instrument Sans** para el texto y **JetBrains Mono** para
-  etiquetas y datos.
-- La escena lee los colores de estos mismos tokens: cambiarlos en `src/app/styles.css` cambia también los puntos.
+## Deployment
+
+The site is served from [viktorstrohush.dev](https://viktorstrohush.dev) by Cloudflare Workers as a static site
+(`wrangler.jsonc`): no server and no edge code, only the files in `dist/`. Every push to `main` deploys it.
+
+```bash
+npm run deploy         # build + wrangler deploy, for a manual release (run `npx wrangler login` first)
+```
+
+The public URL lives in `.env` (`VITE_SITE_URL`); the canonical address and the preview image shown when the link is
+shared come from it. `public/_headers` sets the cache for hashed files and videos.
+
+## Visual identity
+
+| Token      | Value     | Use                                                 |
+| ---------- | --------- | --------------------------------------------------- |
+| `--ink`    | `#07080b` | Background                                          |
+| `--bone`   | `#edeae2` | Text and warm points                                |
+| `--cold`   | `#25a585` | Cool points (depth)                                 |
+| `--signal` | `#2ccfc0` | The only accent: labels, figures and whatever moves |
+
+- **Bricolage Grotesque**, condensed, for headlines; **Instrument Sans** for body text; **JetBrains Mono** for labels
+  and data.
+- The scene reads its colours from these same tokens: changing them in `src/app/styles.css` changes the points too.

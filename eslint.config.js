@@ -4,6 +4,12 @@ import vue from 'eslint-plugin-vue'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
+// Las fronteras entre dominios (ver AGENTS.md) no se saltan con rutas relativas.
+const crossDomain = {
+  group: ['../../*', '../app/*', '../content/*', '../reading/*', '../scene/*', '../shared/*', '../story/*'],
+  message: 'Entre dominios, usa el alias @/.',
+}
+
 export default [
   { ignores: ['dist/', 'node_modules/', 'public/'] },
   js.configs.recommended,
@@ -22,11 +28,7 @@ export default [
   },
   {
     rules: {
-      // Las fronteras entre dominios (ver AGENTS.md) no se saltan con rutas relativas.
-      'no-restricted-imports': [
-        'error',
-        { patterns: [{ group: ['../../*'], message: 'Entre dominios, usa el alias @/.' }] },
-      ],
+      'no-restricted-imports': ['error', { patterns: [crossDomain] }],
       'vue/no-v-html': 'error',
     },
   },
@@ -39,7 +41,7 @@ export default [
         'error',
         {
           paths: [{ name: 'three', message: 'Three.js solo se importa desde src/scene/engine.' }],
-          patterns: [{ group: ['../../*'], message: 'Entre dominios, usa el alias @/.' }],
+          patterns: [crossDomain],
         },
       ],
     },

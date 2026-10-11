@@ -1,9 +1,10 @@
 // Genera, a partir del propio portfolio:
-//   public/og.jpg                          imagen de vista previa para redes
-//   public/cv-viktor-strohush-loyish-*.pdf el CV en cada idioma
+//   public/og.jpg                           imagen de vista previa para redes
+//   public/cv-viktor-strohush-loyish-*.pdf  el CV en cada idioma
+//   docs/readme/*.jpg                       las capturas de los README
 //
 // Necesita Edge o Chrome instalados; BROWSER_PATH permite indicar otro ejecutable.
-import { existsSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
@@ -11,6 +12,13 @@ import { createServer } from 'vite'
 
 const PORT = 4320
 const LOCALES = ['es', 'en']
+/** Secciones cuya forma sale en los README, y el nombre de su captura. */
+const SHAPES = [
+  ['perfil', 'lattice'],
+  ['arquimea', 'globe'],
+  ['ia', 'orbit'],
+  ['orderflow', 'hexagon'],
+]
 const BROWSERS = [
   process.env.BROWSER_PATH,
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
@@ -22,7 +30,8 @@ const BROWSERS = [
 ]
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const output = (file) => join(root, 'public', file)
+const inPublic = (file) => join(root, 'public', file)
+const inReadme = (file) => join(root, 'docs', 'readme', file)
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const executablePath = BROWSERS.find((path) => path && existsSync(path))
@@ -31,6 +40,7 @@ if (!executablePath) {
   process.exit(1)
 }
 
+mkdirSync(inReadme(''), { recursive: true })
 const server = await createServer({ root, logLevel: 'error', server: { port: PORT, strictPort: true } })
 await server.listen()
 const browser = await puppeteer.launch({
@@ -42,20 +52,51 @@ const browser = await puppeteer.launch({
 try {
   const page = await browser.newPage()
   const origin = `http://localhost:${PORT}`
+  const open = (query) => page.goto(`${origin}/?${query}`, { waitUntil: 'networkidle0' })
+  const hide = (selectors) => page.addStyleTag({ content: `${selectors} { visibility: hidden !important; }` })
 
-  // Portada a 1600 × 840 (≈1,91:1, la proporción que piden LinkedIn y compañía).
+  // Portada a 1600 × 840 (≈1,91:1, la proporción que piden LinkedIn y compañía), en cada idioma.
   await page.setViewport({ width: 1600, height: 840 })
-  await page.goto(`${origin}/?lang=es`, { waitUntil: 'networkidle0' })
-  await page.addStyleTag({ content: '.hud, .rail, .hero__hint { display: none !important; }' })
-  await sleep(6000)
-  await page.screenshot({ path: output('og.jpg'), type: 'jpeg', quality: 88 })
+  for (const locale of LOCALES) {
+    await open(`lang=${locale}`)
+    await hide('.hud, .rail, .hero__hint')
+    await sleep(6000)
+    await page.screenshot({ path: inReadme(`hero-${locale}.jpg`), type: 'jpeg', quality: 88 })
+    console.log(`✓ docs/readme/hero-${locale}.jpg`)
+  }
+  copyFileSync(inReadme('hero-es.jpg'), inPublic('og.jpg'))
   console.log('✓ og.jpg')
+
+  // Las formas, solas: se oculta todo menos la escena y se recorta alrededor de la forma.
+  await page.setViewport({ width: 1440, height: 900 })
+  for (const [section, name] of SHAPES) {
+    await open('lang=en')
+    await page.evaluate((id) => {
+      const rect = document.getElementById(id).getBoundingClientRect()
+      window.scrollTo({
+        top: rect.top + window.scrollY + rect.height / 2 - window.innerHeight / 2,
+        behavior: 'instant',
+      })
+    }, section)
+    await sleep(5000)
+    await hide('main, .header, .rail, .bar, .hud, .veil, .grain')
+    // El recorte va en coordenadas de documento y la escena es fija: hay que sumarle el scroll.
+    const scrollY = await page.evaluate(() => window.scrollY)
+    await page.screenshot({
+      path: inReadme(`${name}.jpg`),
+      type: 'jpeg',
+      quality: 86,
+      captureBeyondViewport: false,
+      clip: { x: 672, y: scrollY + 100, width: 700, height: 700 },
+    })
+    console.log(`✓ docs/readme/${name}.jpg`)
+  }
 
   for (const locale of LOCALES) {
     const file = `cv-viktor-strohush-loyish-${locale}.pdf`
-    await page.goto(`${origin}/?lang=${locale}&cv=1`, { waitUntil: 'networkidle0' })
+    await open(`lang=${locale}&cv=1`)
     await page.evaluate(() => document.fonts.ready)
-    await page.pdf({ path: output(file), format: 'A4', printBackground: true, preferCSSPageSize: true })
+    await page.pdf({ path: inPublic(file), format: 'A4', printBackground: true, preferCSSPageSize: true })
     console.log(`✓ ${file}`)
   }
 } finally {

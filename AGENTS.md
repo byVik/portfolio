@@ -15,7 +15,7 @@ npm test               # tests unitarios
 npm run lint           # ESLint
 npm run format         # Prettier (escribe); format:check solo comprueba
 npm run build          # comprobación de tipos + build en dist/
-npm run export         # regenera public/og.jpg y los PDF del CV
+npm run export         # regenera public/og.jpg, los PDF del CV y las capturas del README
 npm run deploy         # build + despliegue en Cloudflare (viktorstrohush.dev)
 ```
 
@@ -63,6 +63,8 @@ scripts/      Exportación de PDF e imagen de vista previa
 - Ningún texto visible en los componentes: va en `src/content`, siempre en los dos idiomas (CON-01, CON-02).
 - Colores y tipografías, solo como tokens CSS de `src/app/styles.css`. La escena lee esos mismos tokens.
 - Los tests viven junto al código (`*.spec.ts`).
+- El README está en inglés (`README.md`, el que enseña GitHub) y en español (`README.es.md`): se cambian los dos a
+  la vez.
 - No se añaden dependencias sin una razón que quepa en una frase.
 
 ## No hacer
