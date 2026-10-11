@@ -1,11 +1,11 @@
 import type { Traffic } from './shapes'
 
-/** Puntos que dibujan cada móvil: la cabeza y su estela. */
+/** Points that draw each mover: the head and its trail. */
 export const POINTS_PER_PATH = 40
 
 /**
- * Coloca en `out` la cabeza y la estela de cada recorrido en el instante
- * `time` (segundos). Devuelve cuántos puntos ha escrito.
+ * Writes into `out` the head and trail of each path at instant
+ * `time` (seconds). Returns how many points it wrote.
  */
 export function fillTraffic(out: Float32Array, { paths, speed, tail }: Traffic, time: number): number {
   const head = (time * speed) % 1

@@ -1,4 +1,4 @@
-/* Identidad: tinta, hueso y una sola señal. Los puntos 3D leen estos mismos tokens. */
+/* Identity: ink, bone and a single signal colour. The 3D points read these same tokens. */
 :root {
   color-scheme: dark;
 
@@ -91,7 +91,7 @@ strong {
   outline-offset: 4px;
 }
 
-/* Capas fijas: escena (0) · velo (1) · contenido (2) · interfaz (5) · grano (6) */
+/* Fixed layers: scene (0) · veil (1) · content (2) · interface (5) · grain (6) */
 
 .veil {
   position: fixed;
@@ -115,7 +115,7 @@ main {
   z-index: 2;
 }
 
-/* Secciones */
+/* Sections */
 
 .section {
   position: relative;
@@ -266,7 +266,7 @@ main {
   color: var(--bone);
 }
 
-/* Aparición escalonada (directiva v-reveal) */
+/* Staggered reveal (v-reveal directive) */
 
 [data-reveal] {
   opacity: 0;
@@ -282,7 +282,7 @@ main {
   transform: none;
 }
 
-/* Arrastrar para girar la forma */
+/* Drag to rotate the shape */
 
 @media (hover: hover) and (pointer: fine) {
   main {
@@ -301,7 +301,7 @@ main {
   user-select: none;
 }
 
-/* Vertical: la forma arriba, el texto en una tarjeta debajo */
+/* Portrait: the shape on top, the text in a card below */
 
 @media (max-width: 760px) {
   .veil {
@@ -321,13 +321,13 @@ main {
   }
 }
 
-/* Modo lectura: el CV ocupa la pantalla y el portfolio no se desplaza por debajo. */
+/* Reading mode: the CV takes the screen and the portfolio does not scroll underneath. */
 
 .is-reading {
   overflow: hidden;
 }
 
-/* Al imprimir, desde cualquier vista, sale el CV en plano. */
+/* Printing from any view outputs the plain CV. */
 
 @media print {
   @page {
@@ -335,7 +335,7 @@ main {
     margin: 11mm 14mm;
   }
 
-  /* Sin esto, el esquema oscuro tiñe los márgenes de la página. */
+  /* Without this, the dark colour scheme tints the page margins. */
   :root {
     color-scheme: light;
   }

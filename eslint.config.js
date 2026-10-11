@@ -4,10 +4,10 @@ import vue from 'eslint-plugin-vue'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
-// Las fronteras entre dominios (ver AGENTS.md) no se saltan con rutas relativas.
+// Domain boundaries (see AGENTS.md) cannot be bypassed with relative paths.
 const crossDomain = {
   group: ['../../*', '../app/*', '../content/*', '../reading/*', '../scene/*', '../shared/*', '../story/*'],
-  message: 'Entre dominios, usa el alias @/.',
+  message: 'Across domains, use the @/ alias.',
 }
 
 export default [
@@ -33,19 +33,19 @@ export default [
     },
   },
   {
-    // Three.js solo entra por el motor de la escena.
+    // Three.js only comes in through the scene engine.
     files: ['src/**'],
     ignores: ['src/scene/engine/**'],
     rules: {
       'no-restricted-imports': [
         'error',
         {
-          paths: [{ name: 'three', message: 'Three.js solo se importa desde src/scene/engine.' }],
+          paths: [{ name: 'three', message: 'Three.js may only be imported from src/scene/engine.' }],
           patterns: [crossDomain],
         },
       ],
     },
   },
-  // Prettier decide el formato: se desactivan las reglas de estilo que chocarían con él.
+  // Prettier owns formatting: style rules that would clash with it are turned off.
   prettier,
 ]

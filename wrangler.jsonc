@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  // Worker sin código: solo sirve los archivos estáticos de dist/.
+  // A Worker with no code: it only serves the static files in dist/.
   "name": "viktorstrohush-portfolio",
   "compatibility_date": "2026-10-09",
   "assets": {
@@ -10,7 +10,7 @@
     { "pattern": "viktorstrohush.dev", "custom_domain": true },
     { "pattern": "www.viktorstrohush.dev", "custom_domain": true },
   ],
-  // El portfolio solo se sirve desde su dominio: sin copias indexables en workers.dev.
+  // The portfolio is only served from its own domain: no indexable copies on workers.dev.
   "workers_dev": false,
   "preview_urls": false,
 }

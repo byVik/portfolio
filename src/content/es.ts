@@ -23,7 +23,7 @@ export const es: Content = {
   },
   chapters: [
     {
-      id: 'perfil',
+      id: 'profile',
       kicker: 'Perfil',
       title: 'Del análisis a producción.',
       lead: 'Desarrollador Full Stack con **más de 5 años** construyendo aplicaciones web con **Java y Vue 3 sobre PostgreSQL** y aplicaciones de escritorio con **Qt y C++20** para la industria audiovisual.',
@@ -82,7 +82,7 @@ export const es: Content = {
       ],
     },
     {
-      id: 'movil',
+      id: 'mobile',
       kicker: 'Arquimea · Apps móviles',
       title: 'Mutua Madrid Open: de Angular a Vue 3.',
       lead: 'Lideré la migración de la app móvil del torneo de **Angular 8 + Ionic a Vue 3 + Capacitor**: mejor rendimiento y experiencia de usuario, y el código unificado con la web.',
@@ -92,7 +92,7 @@ export const es: Content = {
       ],
     },
     {
-      id: 'ia',
+      id: 'ai',
       kicker: 'Desarrollo con IA',
       title: 'Agentes en órbita, criterio en el centro.',
       lead: 'Trabajo con agentes de IA como parte central de mi flujo, **siempre revisando y validando** lo que generan: entregar más rápido sin bajar el listón de calidad.',
@@ -166,17 +166,17 @@ export const es: Content = {
   problems,
   nav: {
     hero: 'Inicio',
-    perfil: 'Perfil',
+    profile: 'Perfil',
     volinga: 'Volinga',
     suite: 'Volinga Suite',
     pipeline: 'Pipeline',
     arquimea: 'Arquimea',
-    movil: 'Móvil',
-    ia: 'IA',
+    mobile: 'Móvil',
+    ai: 'IA',
     orderflow: 'OrderFlow',
-    juegos: 'Juegos',
+    games: 'Juegos',
     stack: 'Stack',
-    contacto: 'Contacto',
+    contact: 'Contacto',
   },
   shapes: {
     cloud: 'nube',

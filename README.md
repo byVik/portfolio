@@ -76,10 +76,11 @@ scripts/      PDF, preview image and README screenshot export
 ## Spec Driven Development
 
 Behaviour is written first in [`specs/`](specs/README.md) as numbered requirements. Tests cite the id of the
-requirement they check, for example `describe('ESC-07 · calidad adaptativa')`, and the code comes last. The rules for
+requirement they check, for example `describe('SCN-07 · adaptive quality')`, and the code comes last. The rules for
 working in this repository, with or without AI agents, are in [`AGENTS.md`](AGENTS.md).
 
-Specs, comments and commit history are in Spanish; identifiers are in English.
+Everything in the repository is in English, except the Spanish site content (`src/content/es.ts`) and the
+[Spanish README](README.es.md).
 
 ## Tech stack
 
@@ -102,7 +103,7 @@ npm run export         # regenerates the CV PDFs, the social preview and the REA
 
 - A text: `src/content/es.ts` and `src/content/en.ts`.
 - A link or a technology: `src/content/shared.ts`.
-- A game: see [specs/05-juegos.md](specs/05-juegos.md).
+- A game: see [specs/05-games.md](specs/05-games.md).
 - A new section: a chapter in both languages and a scene with the same `id` in `src/scene/model/scenes.ts`. A test
   fails if they do not match.
 

@@ -5,7 +5,7 @@ import { trafficFragmentShader, trafficVertexShader } from './shaders'
 
 const MAX_PATHS = 8
 
-/** Los puntos que se mueven por una forma. Se recalculan en cada fotograma. */
+/** The points that travel along a shape. Recomputed every frame. */
 export class TrafficLayer {
   readonly points: Points<BufferGeometry, ShaderMaterial>
 
@@ -15,7 +15,7 @@ export class TrafficLayer {
     const count = MAX_PATHS * POINTS_PER_PATH
     this.positions = new BufferAttribute(new Float32Array(count * 3), 3)
     this.positions.setUsage(DynamicDrawUsage)
-    // 0 en la cabeza de cada móvil, casi 1 al final de su estela.
+    // 0 at the head of each mover, almost 1 at the end of its trail.
     const tail = new Float32Array(count).map((_, i) => (i % POINTS_PER_PATH) / POINTS_PER_PATH)
 
     const geometry = new BufferGeometry()
@@ -28,7 +28,7 @@ export class TrafficLayer {
       transparent: true,
       depthTest: false,
       depthWrite: false,
-      // Sin mezcla aditiva: el acento se queda en su color en vez de quemarse a blanco.
+      // No additive blending: the accent keeps its colour instead of burning out to white.
       blending: NormalBlending,
       uniforms: {
         uSize: { value: 1 },
@@ -41,11 +41,11 @@ export class TrafficLayer {
     this.points = new Points(geometry, material)
     this.points.frustumCulled = false
     this.points.visible = false
-    // Siempre por encima de la forma.
+    // Always on top of the shape.
     this.points.renderOrder = 1
   }
 
-  /** `traffic` indefinido o `alpha` 0 ocultan la capa. `size` es el tamaño de los puntos de la forma. */
+  /** An undefined `traffic` or an `alpha` of 0 hides the layer. `size` is the point size of the shape. */
   update(traffic: Traffic | undefined, time: number, alpha: number, size: number, projection: number): void {
     this.points.visible = traffic !== undefined && alpha > 0
     if (!traffic || alpha <= 0) return

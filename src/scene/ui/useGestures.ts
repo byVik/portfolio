@@ -1,6 +1,6 @@
 import { onBeforeUnmount, onMounted } from 'vue'
 
-/** Lo que los gestos del visitante le piden a la escena. Coordenadas de −1 a 1, origen en el centro. */
+/** What the gestures of the visitor ask of the scene. Coordinates from −1 to 1, origin at the centre. */
 export interface GestureTarget {
   movePointer(x: number, y: number): void
   releasePointer(): void
@@ -9,10 +9,10 @@ export interface GestureTarget {
   shock(x: number, y: number): void
 }
 
-/** Zonas con texto o controles: ahí arrastrar selecciona, no gira la forma. */
+/** Areas with text or controls: dragging there selects, it does not rotate the shape. */
 const NO_DRAG = 'a, button, input, label, .section__body, .hero__body, .header, .rail'
 const CONTROLS = 'a, button, input, label'
-/** Píxeles a partir de los cuales un clic cuenta como arrastre. */
+/** Pixels of movement after which a click counts as a drag. */
 const DRAG_THRESHOLD = 6
 
 const inside = (target: EventTarget | null, selector: string) =>
@@ -24,9 +24,9 @@ const normalized = (event: MouseEvent): [number, number] => [
 ]
 
 /**
- * Traduce el ratón y el tacto a gestos de escena: el cursor aparta los puntos,
- * arrastrar gira la forma y un clic lanza una onda. `target` puede no existir
- * todavía (la escena se carga en diferido).
+ * Turns mouse and touch into scene gestures: the cursor pushes the points away,
+ * dragging rotates the shape and a click fires a shockwave. `target` may not exist
+ * yet (the scene is loaded lazily).
  */
 export function useGestures(target: () => GestureTarget | undefined): void {
   let dragging = false

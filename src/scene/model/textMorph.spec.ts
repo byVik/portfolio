@@ -3,7 +3,7 @@ import { TextMorph } from './textMorph'
 
 const FRAME = 1 / 60
 
-/** Avanza `seconds` segundos y devuelve los puntos que se hayan pedido cargar por el camino. */
+/** Advances `seconds` seconds and returns the points requested for loading along the way. */
 function advance(morph: TextMorph, seconds: number): Float32Array[] {
   const loaded: Float32Array[] = []
   for (let i = 0; i < seconds * 60; i++) {
@@ -13,11 +13,11 @@ function advance(morph: TextMorph, seconds: number): Float32Array[] {
   return loaded
 }
 
-describe('ESC-08 · forma escrita por el visitante', () => {
+describe('SCN-08 · shape typed by the visitor', () => {
   const first = new Float32Array([1, 1, 1])
   const second = new Float32Array([2, 2, 2])
 
-  it('parte de la forma de la escena', () => {
+  it('starts from the shape of the scene', () => {
     const morph = new TextMorph()
     advance(morph, 1)
 
@@ -25,7 +25,7 @@ describe('ESC-08 · forma escrita por el visitante', () => {
     expect(morph.active).toBe(false)
   })
 
-  it('carga el texto pedido y lo forma', () => {
+  it('loads the requested text and forms it', () => {
     const morph = new TextMorph()
     morph.request(first)
 
@@ -34,7 +34,7 @@ describe('ESC-08 · forma escrita por el visitante', () => {
     expect(morph.active).toBe(true)
   })
 
-  it('deshace el texto anterior antes de cargar el siguiente', () => {
+  it('dissolves the previous text before loading the next', () => {
     const morph = new TextMorph()
     morph.request(first)
     advance(morph, 2)
@@ -46,7 +46,7 @@ describe('ESC-08 · forma escrita por el visitante', () => {
     expect(morph.amount).toBe(1)
   })
 
-  it('vuelve a la forma de la escena al deshacer', () => {
+  it('returns to the shape of the scene on undo', () => {
     const morph = new TextMorph()
     morph.request(first)
     advance(morph, 2)

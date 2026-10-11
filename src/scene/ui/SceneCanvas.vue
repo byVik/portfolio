@@ -21,7 +21,7 @@ let observer: ResizeObserver | undefined
 let unmounted = false
 let frame = 0
 let previous = 0
-/** Centro de cada sección en píxeles de documento, en el orden de `scenes`. */
+/** Centre of each section in document pixels, in the order of `scenes`. */
 let centers: number[] = []
 let shown: FieldStatus | undefined
 
@@ -52,7 +52,7 @@ function tick(now: number): void {
   emit('status', status)
 }
 
-/** Three.js se descarga aparte: el texto se pinta sin esperar a la escena. */
+/** Three.js is downloaded separately: the text paints without waiting for the scene. */
 async function createField(target: HTMLCanvasElement): Promise<ParticleField | undefined> {
   const tokens = getComputedStyle(document.documentElement)
   const token = (name: string) => tokens.getPropertyValue(name).trim()
@@ -66,7 +66,7 @@ async function createField(target: HTMLCanvasElement): Promise<ParticleField | u
       reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     })
   } catch {
-    // Sin WebGL (o sin red para el módulo) el portfolio sigue siendo legible.
+    // Without WebGL (or without network for the module) the portfolio is still readable.
     return undefined
   }
 }
@@ -125,7 +125,7 @@ onBeforeUnmount(() => {
   display: block;
   width: 100vw;
   height: 100vh;
-  /* Alto máximo del móvil: la escena no se redimensiona al ocultarse la barra del navegador. */
+  /* Largest mobile viewport height: the scene does not resize when the browser bar hides. */
   height: 100lvh;
 }
 </style>

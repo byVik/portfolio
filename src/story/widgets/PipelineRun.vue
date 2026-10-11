@@ -14,7 +14,7 @@ const running = ref(false)
 let observer: IntersectionObserver | undefined
 let timers: number[] = []
 
-/** Cada etapa se marca cuando el pulso de la escena cruza su anillo. */
+/** Each stage is ticked when the pulse of the scene crosses its ring. */
 function run(): void {
   if (running.value) return
   running.value = true
@@ -30,7 +30,7 @@ function run(): void {
 
 onMounted(() => {
   if (!root.value) return
-  // La primera ejecución es automática: quien solo hace scroll también la ve.
+  // The first run is automatic: visitors who only scroll see it too.
   observer = new IntersectionObserver(
     ([entry]) => {
       if (!entry.isIntersecting) return

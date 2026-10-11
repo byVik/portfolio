@@ -75,10 +75,10 @@ scripts/      Exportación de PDF, imagen de vista previa y capturas del README
 ## Spec Driven Development
 
 El comportamiento se escribe primero en [`specs/`](specs/README.md) como requisitos numerados. Los tests citan el id
-del requisito que comprueban, por ejemplo `describe('ESC-07 · calidad adaptativa')`, y el código llega al final. Las
+del requisito que comprueban, por ejemplo `describe('SCN-07 · adaptive quality')`, y el código llega al final. Las
 reglas para trabajar en el repositorio, con o sin agentes de IA, están en [`AGENTS.md`](AGENTS.md).
 
-Specs, comentarios e historial de commits están en español; los identificadores, en inglés.
+Todo el repositorio está en inglés, salvo el contenido en español de la web (`src/content/es.ts`) y este README.
 
 ## Stack
 
@@ -101,7 +101,7 @@ npm run export         # regenera los PDF del CV, la vista previa y las capturas
 
 - Un texto: `src/content/es.ts` y `src/content/en.ts`.
 - Un enlace o una tecnología: `src/content/shared.ts`.
-- Un juego: ver [specs/05-juegos.md](specs/05-juegos.md).
+- Un juego: ver [specs/05-games.md](specs/05-games.md).
 - Una sección nueva: un capítulo en los dos idiomas y una escena con el mismo `id` en `src/scene/model/scenes.ts`.
   Un test falla si no coinciden.
 

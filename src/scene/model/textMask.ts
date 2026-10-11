@@ -1,10 +1,10 @@
-/** Longitud máxima del texto que el visitante puede convertir en forma. */
+/** Maximum length of the text the visitor can turn into a shape. */
 export const TEXT_LIMIT = 14
 
 /**
- * Reparte `count` puntos sobre los píxeles opacos de una máscara RGBA,
- * centrados y escalados para caber en `span` × `rise` unidades de escena.
- * Devuelve `null` si la máscara está vacía.
+ * Spreads `count` points over the opaque pixels of an RGBA mask,
+ * centred and scaled to fit in `span` × `rise` scene units.
+ * Returns `null` if the mask is empty.
  */
 export function pointsFromMask(
   rgba: ArrayLike<number>,

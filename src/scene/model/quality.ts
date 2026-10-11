@@ -1,10 +1,10 @@
 export interface Quality {
-  /** Fracción de los puntos que se dibuja. */
+  /** Fraction of the points being drawn. */
   points: number
   pixelRatio: number
 }
 
-/** De más a menos calidad. Solo se baja: subir y bajar haría parpadear la escena. */
+/** From highest to lowest quality. It only goes down: going up and down would make the scene flicker. */
 export const QUALITY_STEPS: readonly Quality[] = [
   { points: 1, pixelRatio: 2 },
   { points: 0.7, pixelRatio: 1.5 },
@@ -13,11 +13,11 @@ export const QUALITY_STEPS: readonly Quality[] = [
 ]
 
 /**
- * Mide los FPS por ventanas y pide bajar un escalón de calidad cuando una
- * ventana entera va por debajo del mínimo.
+ * Measures FPS in windows and asks to drop one quality step when a whole
+ * window runs below the minimum.
  */
 export class FrameBudget {
-  /** Índice del escalón actual en `QUALITY_STEPS`. */
+  /** Index of the current step in `QUALITY_STEPS`. */
   level = 0
 
   private waited = 0
@@ -31,9 +31,9 @@ export class FrameBudget {
     private readonly lastLevel = QUALITY_STEPS.length - 1,
   ) {}
 
-  /** `dt` en segundos desde el fotograma anterior. Devuelve `true` si hay que bajar la calidad. */
+  /** `dt` in seconds since the previous frame. Returns `true` when quality must drop. */
   tick(dt: number): boolean {
-    // Un salto largo es una pestaña en segundo plano, no un equipo lento.
+    // A long gap is a background tab, not a slow machine.
     if (dt <= 0 || dt > 0.25 || this.level >= this.lastLevel) return false
     if (this.waited < this.warmupSeconds) {
       this.waited += dt

@@ -7,15 +7,15 @@ function settle(rotation: ShapeRotation, spin: number, seconds: number): void {
   for (let i = 0; i < seconds * 60; i++) rotation.update(FRAME, spin)
 }
 
-describe('ESC-06 · orientación de la forma', () => {
-  it('gira a la velocidad de la escena', () => {
+describe('SCN-06 · shape orientation', () => {
+  it('spins at the speed of the scene', () => {
     const rotation = new ShapeRotation()
     settle(rotation, 0.5, 2)
 
     expect(rotation.yaw).toBeCloseTo(1)
   })
 
-  it('una forma que no gira sola vuelve a mirar de frente tras arrastrarla', () => {
+  it('a shape that does not spin on its own turns back to face the viewer after a drag', () => {
     const rotation = new ShapeRotation()
     rotation.drag(100, 40)
     settle(rotation, 0, 12)
@@ -24,7 +24,7 @@ describe('ESC-06 · orientación de la forma', () => {
     expect(rotation.pitch).toBeCloseTo(0)
   })
 
-  it('una forma que gira sola conserva el giro que le da el visitante', () => {
+  it('a shape that spins on its own keeps the turn the visitor gives it', () => {
     const rotation = new ShapeRotation()
     rotation.dragging = true
     rotation.drag(100, 0)
@@ -34,7 +34,7 @@ describe('ESC-06 · orientación de la forma', () => {
     expect(rotation.yaw).toBeGreaterThan(0.6)
   })
 
-  it('se queda quieta mientras se arrastra', () => {
+  it('stays still while being dragged', () => {
     const rotation = new ShapeRotation()
     rotation.dragging = true
     settle(rotation, 0.5, 1)
@@ -42,14 +42,14 @@ describe('ESC-06 · orientación de la forma', () => {
     expect(rotation.yaw).toBe(0)
   })
 
-  it('limita la inclinación vertical', () => {
+  it('limits the vertical tilt', () => {
     const rotation = new ShapeRotation()
     rotation.drag(0, 10_000)
 
     expect(rotation.pitch).toBe(0.8)
   })
 
-  it('se inclina poco a poco hacia el cursor', () => {
+  it('leans gradually towards the cursor', () => {
     const rotation = new ShapeRotation()
     rotation.leanTowards(1, -1)
     rotation.update(FRAME, 0)

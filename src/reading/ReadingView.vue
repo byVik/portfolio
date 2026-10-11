@@ -32,7 +32,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
-  <!-- Siempre en el DOM: es también lo que se imprime (ver @media print en main.css). -->
+  <!-- Always in the DOM: it is also what gets printed (see @media print in styles.css). -->
   <article v-show="reading" class="cv">
     <div class="cv__bar">
       <button ref="closeButton" type="button" class="cv__action label" @click="reading = false">
@@ -115,7 +115,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
   --paper-ink: #14151a;
   --paper-dim: rgba(20, 21, 26, 0.78);
   --paper-line: rgba(20, 21, 26, 0.16);
-  /* El acento, oscurecido para que se lea sobre claro. */
+  /* The accent, darkened so it reads on a light background. */
   --paper-signal: #0b6e68;
 
   position: fixed;
@@ -342,7 +342,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeydown))
     padding: 0;
   }
 
-  /* Medidas en puntos para que el CV quepa en dos páginas A4. */
+  /* Sizes in points so the CV fits on two A4 pages. */
 
   .cv h1 {
     font-size: 26pt;

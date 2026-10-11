@@ -1,29 +1,29 @@
-# Especificaciones
+# Specifications
 
-Este proyecto se trabaja con **Spec Driven Development**: el comportamiento se escribe primero aquí, después en
-tests y por último en código.
+This project is built with **Spec Driven Development**: behaviour is written here first, then in tests, and last in
+code.
 
-## Flujo
+## Flow
 
-1. **Spec.** Se añade o se modifica un requisito numerado en la spec de su dominio (`ESC-07`, `CON-03`…).
-2. **Tests.** El requisito se convierte en tests que lo citan por su id: `describe('ESC-07 · calidad adaptativa')`.
-3. **Implementación.** El código mínimo que pone esos tests en verde.
-4. **Cambios.** Si el comportamiento cambia, primero cambia la spec.
+1. **Spec.** A numbered requirement is added or changed in the spec of its domain (`SCN-07`, `CNT-03`…).
+2. **Tests.** The requirement becomes tests that cite its id: `describe('SCN-07 · adaptive quality')`.
+3. **Implementation.** The minimum code that turns those tests green.
+4. **Changes.** If the behaviour changes, the spec changes first.
 
-## Índice
+## Index
 
-| Spec                                    | Prefijo | Dominio       | Qué cubre                                             |
-| --------------------------------------- | ------- | ------------- | ----------------------------------------------------- |
-| [01 · Escena 3D](01-escena.md)          | `ESC`   | `src/scene`   | Formas, transformación, tráfico, gestos y rendimiento |
-| [02 · Contenido](02-contenido.md)       | `CON`   | `src/content` | El CV, sus dos idiomas y lo que no se publica         |
-| [03 · Recorrido](03-recorrido.md)       | `REC`   | `src/story`   | Secciones, navegación y controles interactivos        |
-| [04 · Modo lectura](04-modo-lectura.md) | `LEC`   | `src/reading` | El CV en plano, imprimible y descargable              |
-| [05 · Juegos](05-juegos.md)             | `JUE`   | `src/story`   | La sección de juegos: fichas, estados y vídeos        |
+| Spec                                    | Prefix | Domain        | What it covers                                        |
+| --------------------------------------- | ------ | ------------- | ----------------------------------------------------- |
+| [01 · 3D scene](01-scene.md)            | `SCN`  | `src/scene`   | Shapes, morphing, traffic, gestures and performance   |
+| [02 · Content](02-content.md)           | `CNT`  | `src/content` | The CV, its two languages and what is never published |
+| [03 · Story](03-story.md)               | `STO`  | `src/story`   | Sections, navigation and interactive controls         |
+| [04 · Reading mode](04-reading-mode.md) | `REA`  | `src/reading` | The plain CV, printable and downloadable              |
+| [05 · Games](05-games.md)               | `GAM`  | `src/story`   | The games section: cards, statuses and videos         |
 
-## Convenciones
+## Conventions
 
-- Un requisito describe **qué ve o qué puede hacer el visitante**, no cómo está escrito el código.
-- Cada requisito dice cómo se verifica: **Test** (con su archivo) o **Manual** (se comprueba en el navegador).
-  Lo visual se verifica a mano; todo lo que es lógica tiene test.
-- Los ids no se reutilizan: un requisito retirado se marca como retirado.
-- Para localizar los tests de un requisito basta con buscar su id en `src/`.
+- A requirement describes **what the visitor sees or can do**, not how the code is written.
+- Each requirement says how it is verified: **Test** (with its file) or **Manual** (checked in the browser).
+  Visual behaviour is verified by hand; everything that is logic has a test.
+- Ids are never reused: a retired requirement is marked as retired.
+- To find the tests of a requirement, search for its id in `src/`.

@@ -1,75 +1,76 @@
 # AGENTS.md
 
-Reglas para agentes de IA, y para personas, que trabajen en este repositorio.
+Rules for AI agents, and for people, working in this repository.
 
-## Qué es
+## What it is
 
-El portfolio de Viktor Strohush Loyish: una página con una escena 3D de puntos que cambia de forma con el scroll.
-Vue 3, TypeScript, Three.js, Vite y Vitest. Sin backend.
+The portfolio of Viktor Strohush Loyish: a page with a 3D scene of points that changes shape as you scroll.
+Vue 3, TypeScript, Three.js, Vite and Vitest. No backend.
 
-## Comandos
+## Commands
 
 ```bash
-npm run dev            # servidor de desarrollo
-npm test               # tests unitarios
+npm run dev            # development server
+npm test               # unit tests
 npm run lint           # ESLint
-npm run format         # Prettier (escribe); format:check solo comprueba
-npm run build          # comprobación de tipos + build en dist/
-npm run export         # regenera public/og.jpg, los PDF del CV y las capturas del README
-npm run deploy         # build + despliegue en Cloudflare (viktorstrohush.dev)
+npm run format         # Prettier (writes); format:check only checks
+npm run build          # type check + build in dist/
+npm run export         # regenerates public/og.jpg, the CV PDFs and the README screenshots
+npm run deploy         # build + deploy to Cloudflare (viktorstrohush.dev)
 ```
 
-Antes de dar un cambio por terminado: `npm run lint`, `npm run format:check`, `npm test` y `npm run build` en verde.
+Before calling a change done: `npm run lint`, `npm run format:check`, `npm test` and `npm run build`, all green.
 
-## Flujo de trabajo: spec → tests → código
+## Workflow: spec → tests → code
 
-1. Si cambia el comportamiento, **primero** se actualiza la spec de su dominio en `specs/`.
-2. El requisito se convierte en tests que citan su id: `describe('ESC-07 · …')`.
-3. Después se implementa.
+1. If behaviour changes, the spec of its domain in `specs/` is updated **first**.
+2. The requirement becomes tests that cite its id: `describe('SCN-07 · …')`.
+3. Then it is implemented.
 
-Lo visual se verifica a mano en el navegador y se dice así en la spec. No se marca como probado lo que no se ha
-probado.
+Visual behaviour is verified by hand in the browser, and the spec says so. Nothing is marked as tested unless it
+has been tested.
 
-## Estructura: por dominio
+## Structure: by domain
 
 ```
 src/
-  app/        Composición de la página, cabecera y tokens de la identidad visual
-  content/    El CV, sus dos idiomas y el idioma activo
-  scene/      La escena 3D
-    model/      Lógica pura: formas, recorridos, scroll, rotación, calidad
-    engine/     Three.js: renderizado y shaders
-    ui/         Vue: lienzo, gestos, HUD y el puente `controls.ts`
-  story/      Las secciones del recorrido y sus controles (widgets/)
-  reading/    Modo lectura
-  shared/     Utilidades sin dominio
-specs/        Especificaciones
-scripts/      Exportación de PDF e imagen de vista previa
+  app/        Page composition, header and the visual identity tokens
+  content/    The CV, its two languages and the active locale
+  scene/      The 3D scene
+    model/      Pure logic: shapes, paths, scroll, rotation, quality
+    engine/     Three.js: rendering and shaders
+    ui/         Vue: canvas, gestures, HUD and the `controls.ts` bridge
+  story/      The sections of the scroll story and their controls (widgets/)
+  reading/    Reading mode
+  shared/     Utilities with no domain
+specs/        Specifications
+scripts/      PDF, preview image and README screenshot export
 ```
 
-### Reglas de dependencia
+### Dependency rules
 
-- `scene/model` no importa Three.js ni Vue, ni toca el DOM. Todo lo que hay ahí tiene tests.
-- `scene/engine` es el único sitio que importa Three.js.
-- El resto de la aplicación habla con la escena solo a través de `scene/ui/controls.ts`.
-- `content` no depende de `story`, `reading` ni `app`.
-- Dentro de un dominio, imports relativos; entre dominios, alias `@/`.
+- `scene/model` imports neither Three.js nor Vue, and does not touch the DOM. Everything in it has tests.
+- `scene/engine` is the only place that imports Three.js.
+- The rest of the application talks to the scene only through `scene/ui/controls.ts`.
+- `content` does not depend on `story`, `reading` or `app`.
+- Within a domain, relative imports; across domains, the `@/` alias.
 
-## Convenciones
+## Conventions
 
-- Identificadores en inglés; comentarios y textos en español.
-- Los comentarios explican el porqué, no repiten el código.
-- Componentes pequeños y de una sola responsabilidad. La lógica reutilizable va a un composable o a `model/`.
-- Ningún texto visible en los componentes: va en `src/content`, siempre en los dos idiomas (CON-01, CON-02).
-- Colores y tipografías, solo como tokens CSS de `src/app/styles.css`. La escena lee esos mismos tokens.
-- Los tests viven junto al código (`*.spec.ts`).
-- El README está en inglés (`README.md`, el que enseña GitHub) y en español (`README.es.md`): se cambian los dos a
-  la vez.
-- No se añaden dependencias sin una razón que quepa en una frase.
+- Everything is in English: identifiers, comments, test names, specs and commit messages. The only Spanish in the
+  repository is the Spanish site content (`src/content/es.ts`) and `README.es.md`.
+- Comments explain why, they do not repeat the code.
+- Small, single-responsibility components. Reusable logic goes into a composable or into `model/`.
+- No visible text in components: it goes in `src/content`, always in both languages (CNT-01, CNT-02).
+- Colours and typefaces only as CSS tokens in `src/app/styles.css`. The scene reads those same tokens.
+- Tests live next to the code (`*.spec.ts`).
+- The README exists in English (`README.md`, the one GitHub shows) and in Spanish (`README.es.md`): both are
+  changed together.
+- No new dependencies without a reason that fits in one sentence.
 
-## No hacer
+## Do not
 
-- No publicar teléfono ni correo. CON-04 lo comprueba con un test: no se desactiva.
-- No inventar ni adornar datos del CV. Lo que no esté en el CV real no entra.
-- No usar `v-html`.
-- No subir el número de puntos ni la resolución por defecto sin medir el rendimiento.
+- Do not publish a phone number or an email. CNT-04 checks it with a test: it is not to be disabled.
+- Do not invent or embellish CV data. If it is not in the real CV, it does not go in.
+- Do not use `v-html`.
+- Do not raise the default point count or resolution without measuring performance.

@@ -1,8 +1,8 @@
 export const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
-/** Fracción del camino hacia un objetivo que se recorre en `dt` segundos (suavizado exponencial). */
+/** Fraction of the way to a target covered in `dt` seconds (exponential smoothing). */
 export const damp = (rate: number, dt: number) => 1 - Math.exp(-rate * dt)
 
-/** Avanza `value` hacia `goal` como mucho `step`, sin pasarse. */
+/** Moves `value` towards `goal` by at most `step`, without overshooting. */
 export const approach = (value: number, goal: number, step: number) =>
   value < goal ? Math.min(goal, value + step) : Math.max(goal, value - step)

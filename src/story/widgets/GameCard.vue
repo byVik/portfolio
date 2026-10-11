@@ -6,7 +6,7 @@ import { useLoopPreview } from './useLoopPreview'
 
 const props = defineProps<{ game: Game; statusLabel: string }>()
 
-/** Vídeo y póster comparten nombre con el id del juego. */
+/** Video and poster share their name with the game id. */
 const media = `${import.meta.env.BASE_URL}games/${props.game.id}`
 const video = useTemplateRef<HTMLVideoElement>('video')
 const canvas = useTemplateRef<HTMLCanvasElement>('canvas')
@@ -79,7 +79,7 @@ const { playing, toggle } = useLoopPreview(video, canvas, `${media}.mp4`)
   object-fit: cover;
 }
 
-/* El vídeo solo alimenta al lienzo: sigue en el DOM (iOS lo exige para reproducir) pero no se ve. */
+/* The video only feeds the canvas: it stays in the DOM (iOS requires that to play) but is not visible. */
 .game__source {
   position: absolute;
   width: 1px;

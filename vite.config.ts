@@ -3,11 +3,11 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  // Rutas relativas: el build funciona igual en la raíz de un dominio que en una subcarpeta.
+  // Relative paths: the build works the same at a domain root or in a subfolder.
   base: './',
   plugins: [vue()],
   resolve: {
-    // `@/` para importar de otro dominio; dentro del mismo, rutas relativas.
+    // `@/` to import from another domain; within the same one, relative paths.
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
   test: {

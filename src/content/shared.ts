@@ -1,6 +1,6 @@
 import type { Game, ProfileLink } from './types'
 
-/** Lo que no se traduce: nombres propios, enlaces y tecnologías. */
+/** What is not translated: proper names, links and technologies. */
 
 export const name = { firstName: 'Viktor', lastName: 'Strohush Loyish' }
 
@@ -47,7 +47,7 @@ export const tech = {
   testing: ['JUnit', 'Mockito', 'Testcontainers', 'Vitest', 'TDD', 'Clean Code', 'SOLID', 'DDD', 'Scrum'],
 }
 
-/** Los juegos, sin su texto: cada idioma añade género, frase y cifra destacada. */
+/** The games, without their copy: each language adds genre, pitch and headline figure. */
 export const games = {
   gravityFlip: {
     id: 'gravity-flip',

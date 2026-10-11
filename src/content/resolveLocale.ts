@@ -3,8 +3,8 @@ import type { Locale } from './types'
 export const isLocale = (value: string | null): value is Locale => value === 'es' || value === 'en'
 
 /**
- * Idioma con el que arranca el portfolio: manda `?lang=`; si no, la última
- * elección del visitante; si no, el idioma del navegador (español o inglés).
+ * Language the portfolio starts in: `?lang=` wins; otherwise the last choice
+ * of the visitor; otherwise the browser language (Spanish or English).
  */
 export function resolveLocale(asked: string | null, saved: string | null, browser: string): Locale {
   if (isLocale(asked)) return asked

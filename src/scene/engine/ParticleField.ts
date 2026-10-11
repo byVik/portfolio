@@ -26,9 +26,9 @@ const FOV = 38
 const CAMERA_Z = 7
 const HALF_FOV_TAN = Math.tan((FOV * Math.PI) / 360)
 const HALF_HEIGHT = HALF_FOV_TAN * CAMERA_Z
-/** Radio aproximado de cualquier forma, para encajarla en pantallas estrechas. */
+/** Approximate radius of any shape, used to fit it on narrow screens. */
 const SHAPE_RADIUS = 1.9
-/** Fracción de puntos que cae en las escenas con `prune`: el «−80 % de código». */
+/** Fraction of points that falls in scenes with `prune`: the “−80% of code”. */
 const PRUNE_FRACTION = 0.8
 const POINT_SIZE = 0.034
 const INTRO_SECONDS = 2.6
@@ -53,19 +53,19 @@ export interface FieldOptions {
 }
 
 export interface FieldStatus {
-  /** Escena más cercana a la posición actual. */
+  /** Scene closest to the current position. */
   index: number
-  /** Porcentaje de puntos que siguen a la vista. */
+  /** Percentage of points still visible. */
   visible: number
-  /** La última escena muestra un texto escrito por el visitante. */
+  /** The last scene is showing a text typed by the visitor. */
   custom: boolean
-  /** Puntos que se están dibujando con la calidad actual. */
+  /** Points being drawn at the current quality. */
   points: number
 }
 
 /**
- * Nube de puntos que se transforma de una forma a otra. No sabe nada de Vue
- * ni del scroll: recibe la posición de escena y los gestos, y dibuja.
+ * A cloud of points that morphs from one shape into another. It knows nothing about
+ * Vue or scrolling: it receives the scene position and the gestures, and draws.
  */
 export class ParticleField {
   private readonly renderer: WebGLRenderer
@@ -95,7 +95,7 @@ export class ParticleField {
   private layout = { x: 0, y: 0, fit: 1, alpha: 1 }
   private size = { width: 0, height: 0 }
   private projection = 1
-  /** Fracción de los puntos que se dibuja (calidad). */
+  /** Fraction of the points being drawn (quality). */
   private density = 1
   private position = 0
   private loaded = -1
@@ -169,7 +169,7 @@ export class ParticleField {
     this.scene.add(this.group)
   }
 
-  /** Cuántos puntos debe tener una forma personalizada. */
+  /** How many points a custom shape must have. */
   get capacity(): number {
     return this.count
   }
@@ -180,7 +180,7 @@ export class ParticleField {
     this.applyViewport()
   }
 
-  /** Menos puntos y menos resolución para equipos que no llegan. */
+  /** Fewer points and lower resolution for machines that cannot keep up. */
   setQuality({ points, pixelRatio }: Quality): void {
     this.density = points
     this.geometry.setDrawRange(0, Math.round(this.count * points))
@@ -188,7 +188,7 @@ export class ParticleField {
     this.applyViewport()
   }
 
-  /** Coordenadas normalizadas: de −1 a 1, con el origen en el centro de la pantalla. */
+  /** Normalized coordinates: from −1 to 1, with the origin at the centre of the screen. */
   movePointer(x: number, y: number): void {
     this.rotation.leanTowards(x, y)
     this.toWorld(x, y, this.pointerGoal)
@@ -208,28 +208,28 @@ export class ParticleField {
     this.rotation.drag(dx, dy)
   }
 
-  /** Onda expansiva desde el punto en el que se ha hecho clic. */
+  /** Shockwave from the point that was clicked. */
   shock(x: number, y: number): void {
     this.toWorld(x, y, this.shockOrigin)
     this.shockAge = 0
   }
 
-  /** Lanza un pulso que recorre la pipeline de principio a fin. */
+  /** Fires a pulse that travels the pipeline from end to end. */
   runPulse(): void {
     this.pulse = 0
   }
 
-  /** Devuelve a su sitio el código podado para comparar el antes y el después. */
+  /** Puts the pruned code back to compare before and after. */
   showBefore(on: boolean): void {
     this.beforeGoal = on ? 1 : 0
   }
 
-  /** Forma personalizada para la última escena; `null` vuelve a la nube. */
+  /** Custom shape for the last scene; `null` returns to the cloud. */
   setText(points: Float32Array | null): void {
     this.text.request(points)
   }
 
-  /** Avanza `dt` segundos hacia la posición de escena `target` y dibuja un fotograma. */
+  /** Advances `dt` seconds towards the scene position `target` and draws a frame. */
   update(dt: number, target: number): FieldStatus {
     const uniforms = this.material.uniforms
     const last = this.scenes.length - 1
@@ -250,7 +250,7 @@ export class ParticleField {
       this.written.array.set(nextText)
       this.written.needsUpdate = true
     }
-    // El texto solo existe en la última escena: al subir, se deshace con el scroll.
+    // The text only exists in the last scene: scrolling back up dissolves it.
     const text = this.text.amount * clamp(this.position - (last - 1), 0, 1)
 
     this.before = approach(this.before, this.beforeGoal, dt / BEFORE_SECONDS)
@@ -275,7 +275,7 @@ export class ParticleField {
     this.pointer.lerp(this.pointerGoal, damp(12, dt))
     this.force += (this.forceGoal - this.force) * damp(4, dt)
 
-    // Con menos puntos, cada uno brilla un poco más para que la forma no se apague.
+    // With fewer points, each one shines a little more so the shape does not fade.
     const size = POINT_SIZE * (0.5 + 0.5 * this.layout.fit) * this.density ** -0.2
     uniforms.uTime.value = this.time
     uniforms.uMix.value = mix
@@ -291,7 +291,7 @@ export class ParticleField {
     uniforms.uPointerForce.value = this.force
     uniforms.uShockAge.value = this.shockAge
 
-    // El tráfico es el de la escena más cercana y se apaga a medio camino de la siguiente.
+    // Traffic belongs to the closest scene and fades out halfway to the next one.
     const nearest = clamp(Math.round(this.position), 0, last)
     const presence = clamp(1 - Math.abs(this.position - nearest) * 2.4, 0, 1)
     this.trafficLayer.update(
@@ -328,7 +328,7 @@ export class ParticleField {
     this.camera.aspect = aspect
     this.camera.updateProjectionMatrix()
 
-    // En horizontal la forma vive a la derecha del texto; en vertical, encima.
+    // In landscape the shape sits to the right of the text; in portrait, above it.
     const halfWidth = HALF_HEIGHT * aspect
     this.layout =
       aspect < 1
@@ -339,7 +339,7 @@ export class ParticleField {
     this.material.uniforms.uProjection.value = this.projection
   }
 
-  /** Carga en los buffers la escena `index` y la siguiente. */
+  /** Loads scene `index` and the next one into the buffers. */
   private load(index: number): void {
     this.from.array.set(this.shapes[index])
     this.to.array.set(this.shapes[index + 1])
@@ -348,7 +348,7 @@ export class ParticleField {
     this.loaded = index
   }
 
-  /** Proyecta un punto de pantalla sobre el plano z = 0 de la escena. */
+  /** Projects a screen point onto the z = 0 plane of the scene. */
   private toWorld(x: number, y: number, out: Vector3): Vector3 {
     this.ray.set(x, y, 0.5).unproject(this.camera).sub(this.camera.position).normalize()
     return out.copy(this.camera.position).addScaledVector(this.ray, -this.camera.position.z / this.ray.z)

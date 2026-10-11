@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{ text: string }>()
 
-/** Los tramos impares de `a **b** c` son los que van en negrita. */
+/** The odd segments of `a **b** c` are the bold ones. */
 const parts = computed(() => props.text.split('**').map((value, i) => ({ value, strong: i % 2 === 1 })))
 </script>
 

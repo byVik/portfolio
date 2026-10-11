@@ -33,7 +33,7 @@ vec3 swirl(vec3 p, float t) {
   );
 }
 
-// Cada punto arranca con su propio retraso: la forma se deshace y se rehace por oleadas.
+// Each point starts with its own delay: the shape comes apart and re-forms in waves.
 float staggered(float progress, float delay, float spread) {
   float t = clamp((progress - delay * spread) / (1.0 - spread), 0.0, 1.0);
   return t * t * (3.0 - 2.0 * t);
@@ -51,7 +51,7 @@ void main() {
   float scattered = (1.0 - uIntro) * (1.0 - uIntro);
   p += (p * 1.4 + (aRand.yzw - 0.5) * 5.0) * scattered;
 
-  // El código que sobra: primero estorba alrededor de la forma, después cae.
+  // The spare code: first it clutters around the shape, then it falls.
   float prunable = step(aRand.y, PRUNE_FRACTION);
   p += (aRand.zwx - 0.5) * 2.0 * uClutter * prunable;
   float turn = aRand.y / PRUNE_FRACTION * 0.8;

@@ -12,13 +12,13 @@ const points = computed(() => new Intl.NumberFormat(content.value.locale))
 </script>
 
 <template>
-  <section id="contacto" class="section contact" aria-labelledby="contacto-title">
+  <section id="contact" class="section contact" aria-labelledby="contact-title">
     <div v-reveal class="section__body">
       <p class="kicker" data-reveal>
         <span class="kicker__number">{{ String(number).padStart(2, '0') }}</span
         >{{ content.ui.contactKicker }}
       </p>
-      <h2 id="contacto-title" class="title" data-reveal style="--i: 1">{{ content.ui.contactTitle }}</h2>
+      <h2 id="contact-title" class="title" data-reveal style="--i: 1">{{ content.ui.contactTitle }}</h2>
       <p class="lead" data-reveal style="--i: 2">
         {{ content.profile.location }} · {{ content.profile.availability }}. {{ content.ui.contactLead }}
       </p>

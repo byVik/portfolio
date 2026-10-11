@@ -1,10 +1,10 @@
 import { ref } from 'vue'
 
-/** Lo que las secciones pueden pedirle a la escena 3D. */
+/** What the sections can ask of the 3D scene. */
 export interface SceneControls {
   runPipeline(): void
   showBefore(on: boolean): void
-  /** Devuelve `false` si el texto no produjo ninguna forma. */
+  /** Returns `false` if the text produced no shape. */
   shapeText(text: string): Promise<boolean>
 }
 
@@ -16,10 +16,10 @@ const idle: SceneControls = {
 
 let current = idle
 
-/** `true` cuando hay WebGL y la escena está dibujando. */
+/** `true` when WebGL is available and the scene is drawing. */
 export const sceneReady = ref(false)
 
-/** La escena se registra al montarse; devuelve la función para darse de baja. */
+/** The scene registers itself on mount; returns the function to unregister. */
 export function registerSceneControls(controls: SceneControls): () => void {
   current = controls
   sceneReady.value = true

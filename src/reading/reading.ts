@@ -3,7 +3,7 @@ import { queryParam, setQueryParam } from '@/shared/url'
 
 const PARAM = 'cv'
 
-/** Modo lectura: el CV en plano, sin escena. `?cv=1` lo abre directamente. */
+/** Reading mode: the plain CV, without the scene. `?cv=1` opens it directly. */
 export const reading = ref(queryParam(PARAM) !== null)
 
 watch(

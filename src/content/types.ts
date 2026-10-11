@@ -10,7 +10,7 @@ export interface Stat {
 }
 
 export interface Chapter {
-  /** Debe coincidir con el id de su escena en `scene/scenes.ts`. */
+  /** Must match the id of its scene in `scene/model/scenes.ts`. */
   id: string
   kicker: string
   title: string
@@ -25,32 +25,32 @@ export interface Chapter {
 export type GameStatus = 'published' | 'development'
 
 export interface Game {
-  /** También es el nombre de su vídeo y su póster en `public/games/`. */
+  /** Also the name of its video and poster in `public/games/`. */
   id: string
   name: string
   genre: string
   pitch: string
   tech: string[]
   status: GameStatus
-  /** Cifra destacada. Solo en juegos publicados (JUE-04). */
+  /** Headline figure. Published games only (GAM-04). */
   highlight?: string
-  /** Vacío mientras el juego no esté publicado (JUE-03). */
+  /** Empty until the game is published (GAM-03). */
   links: { label: string; href: string }[]
 }
 
 export interface ProfileLink {
   label: string
   href: string
-  /** La dirección tal y como se lee en el CV impreso. */
+  /** The address as it reads on the printed CV. */
   handle: string
 }
 
 /**
- * Todo el texto del portfolio en un idioma. Los fragmentos entre
- * **dobles asteriscos** se muestran en negrita.
+ * All the portfolio text in one language. Fragments between
+ * **double asterisks** are rendered in bold.
  */
 export interface Content {
-  /** Etiqueta BCP 47: idioma del documento y formato de los números. */
+  /** BCP 47 tag: document language and number formatting. */
   locale: string
   meta: { title: string; description: string }
   profile: {
@@ -63,7 +63,7 @@ export interface Content {
     location: string
     availability: string
     remote: string
-    /** Dónde se pide el CV completo. */
+    /** Where to ask for the full CV. */
     linkedin: string
     links: ProfileLink[]
   }
@@ -77,11 +77,11 @@ export interface Content {
   }
   stack: { label: string; items: string[]; highlight?: boolean }[]
   extras: { label: string; lines: string[] }[]
-  /** Atajos del campo «¿qué forma tiene tu problema?». */
+  /** Shortcuts for the “what shape is your problem?” field. */
   problems: string[]
-  /** Nombre de cada sección en la navegación, por id de escena. */
+  /** Name of each section in the navigation, by scene id. */
   nav: Record<string, string>
-  /** Nombre de cada forma en el HUD. */
+  /** Name of each shape in the HUD. */
   shapes: Record<ShapeName, string>
   ui: {
     home: string
@@ -113,7 +113,7 @@ export interface Content {
     hud: { shape: string; points: string; visible: string; hint: string }
     footer: string
     footerPoints: string
-    /** Invitación a pedir el CV completo, en la sección de contacto. */
+    /** Invitation to ask for the full CV, in the contact section. */
     fullCv: string
     cv: { open: string; close: string; print: string; download: string; file: string; summaryNote: string }
   }

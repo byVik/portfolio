@@ -5,19 +5,19 @@ import { en } from './en'
 import { es } from './es'
 import type { Content } from './types'
 
-describe.each(Object.entries({ es, en }))('contenido «%s»', (_, content) => {
-  it('REC-01 · JUE-01 · tiene una sección por escena, con los juegos entre los capítulos y el stack', () => {
-    const sections = ['hero', ...content.chapters.map((chapter) => chapter.id), 'juegos', 'stack', 'contacto']
+describe.each(Object.entries({ es, en }))('%s content', (_, content) => {
+  it('STO-01 · GAM-01 · has one section per scene, with the games between the chapters and the stack', () => {
+    const sections = ['hero', ...content.chapters.map((chapter) => chapter.id), 'games', 'stack', 'contact']
 
     expect(sections).toEqual(scenes.map((scene) => scene.id))
   })
 
-  it('CON-02 · nombra todas las secciones y todas las formas', () => {
+  it('CNT-02 · names every section and every shape', () => {
     for (const { id } of scenes) expect(content.nav[id], id).toBeTruthy()
     for (const shape of shapeNames) expect(content.shapes[shape], shape).toBeTruthy()
   })
 
-  it('CON-04 · no publica teléfono ni correo', () => {
+  it('CNT-04 · publishes no phone number or email', () => {
     const text = JSON.stringify(content)
 
     expect(text).not.toMatch(/[\w.+-]+@[\w-]+\.\w+/)
@@ -25,8 +25,8 @@ describe.each(Object.entries({ es, en }))('contenido «%s»', (_, content) => {
   })
 })
 
-describe('CON-02 · los dos idiomas cuentan lo mismo', () => {
-  /** Lo que no depende del idioma: estructura, cifras y enlaces. */
+describe('CNT-02 · both languages tell the same story', () => {
+  /** What does not depend on the language: structure, figures and links. */
   const outline = (content: Content) =>
     content.chapters.map(({ id, bullets, stat, steps, widget, link }) => ({
       id,
@@ -37,11 +37,11 @@ describe('CON-02 · los dos idiomas cuentan lo mismo', () => {
       href: link?.href,
     }))
 
-  it('con los mismos capítulos, cifras y enlaces', () => {
+  it('with the same chapters, figures and links', () => {
     expect(outline(en)).toEqual(outline(es))
   })
 
-  it('con el mismo stack y los mismos datos de contacto', () => {
+  it('with the same stack and the same contact details', () => {
     expect(en.stack.map((group) => group.items)).toEqual(es.stack.map((group) => group.items))
     expect(en.profile.links).toEqual(es.profile.links)
     expect(en.extras).toHaveLength(es.extras.length)

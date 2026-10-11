@@ -33,7 +33,7 @@ import { vReveal } from './reveal'
         </a>
       </div>
     </div>
-    <a class="hero__hint label" href="#perfil">{{ content.ui.scrollHint }} <span aria-hidden="true">↓</span></a>
+    <a class="hero__hint label" href="#profile">{{ content.ui.scrollHint }} <span aria-hidden="true">↓</span></a>
   </section>
 </template>
 

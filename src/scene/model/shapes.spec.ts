@@ -3,19 +3,19 @@ import { buildShape, shapeNames } from './shapes'
 
 const COUNT = 2000
 
-describe.each(shapeNames)('ESC-01 · forma «%s»', (name) => {
+describe.each(shapeNames)('SCN-01 · %s shape', (name) => {
   const points = buildShape(name, COUNT, 1)
 
-  it('devuelve tres coordenadas finitas por punto', () => {
+  it('returns three finite coordinates per point', () => {
     expect(points).toHaveLength(COUNT * 3)
     expect(points.every(Number.isFinite)).toBe(true)
   })
 
-  it('cabe en el encuadre de la cámara', () => {
+  it('fits inside the camera frame', () => {
     expect(Math.max(...points.map(Math.abs))).toBeLessThanOrEqual(2.3)
   })
 
-  it('es determinista para una misma semilla', () => {
+  it('is deterministic for a given seed', () => {
     expect(buildShape(name, COUNT, 1)).toEqual(points)
     expect(buildShape(name, COUNT, 2)).not.toEqual(points)
   })

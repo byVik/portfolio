@@ -50,7 +50,7 @@ import LanguageSwitch from '@/content/LanguageSwitch.vue'
   justify-content: space-between;
   width: 100%;
   padding: 1.4rem var(--gutter) 2.2rem;
-  /* Opaco tras el logo y los enlaces; debajo se desvanece para que el contenido no choque al pasar. */
+  /* Opaque behind the logo and links; it fades out below so the content does not collide as it passes. */
   background: linear-gradient(180deg, var(--ink) 0%, var(--ink) 62%, rgba(7, 8, 11, 0) 100%);
   pointer-events: none;
 }

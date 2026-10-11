@@ -7,13 +7,13 @@ defineProps<{ number: number }>()
 </script>
 
 <template>
-  <section id="juegos" class="section" aria-labelledby="juegos-title">
+  <section id="games" class="section" aria-labelledby="games-title">
     <div v-reveal class="section__body section__body--wide">
       <p class="kicker" data-reveal>
         <span class="kicker__number">{{ String(number).padStart(2, '0') }}</span
         >{{ content.games.kicker }}
       </p>
-      <h2 id="juegos-title" class="title" data-reveal style="--i: 1">{{ content.games.title }}</h2>
+      <h2 id="games-title" class="title" data-reveal style="--i: 1">{{ content.games.title }}</h2>
       <p class="lead games__lead" data-reveal style="--i: 2">{{ content.games.lead }}</p>
       <div class="games">
         <GameCard

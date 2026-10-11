@@ -5,7 +5,7 @@ const WIDTH = 1024
 const HEIGHT = 320
 const FONT = '"Bricolage Grotesque Variable", system-ui, sans-serif'
 
-/** Dibuja el texto en un lienzo oculto y lo convierte en puntos. Vacío = sin forma. */
+/** Draws the text on a hidden canvas and turns it into points. Empty = no shape. */
 export async function textToPoints(text: string, count: number): Promise<Float32Array | null> {
   const label = text.trim().toUpperCase().slice(0, TEXT_LIMIT)
   if (!label) return null

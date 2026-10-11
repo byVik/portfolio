@@ -15,8 +15,8 @@ const observer =
       )
 
 /**
- * `v-reveal`: marca el elemento con `is-in` la primera vez que entra en
- * pantalla. Sus hijos con `data-reveal` aparecen escalonados (ver main.css).
+ * `v-reveal`: marks the element with `is-in` the first time it enters the
+ * viewport. Its children with `data-reveal` appear staggered (see styles.css).
  */
 export const vReveal: Directive<HTMLElement> = {
   mounted(el) {

@@ -1,9 +1,9 @@
-// Genera, a partir del propio portfolio:
-//   public/og.jpg                           imagen de vista previa para redes
-//   public/cv-viktor-strohush-loyish-*.pdf  el CV en cada idioma
-//   docs/readme/*.jpg                       las capturas de los README
+// Generates, from the portfolio itself:
+//   public/og.jpg                           social preview image
+//   public/cv-viktor-strohush-loyish-*.pdf  the CV in each language
+//   docs/readme/*.jpg                       the README screenshots
 //
-// Necesita Edge o Chrome instalados; BROWSER_PATH permite indicar otro ejecutable.
+// Needs Edge or Chrome installed; BROWSER_PATH points to a different executable.
 import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -12,11 +12,11 @@ import { createServer } from 'vite'
 
 const PORT = 4320
 const LOCALES = ['es', 'en']
-/** Secciones cuya forma sale en los README, y el nombre de su captura. */
+/** Sections whose shape appears in the READMEs, and the name of each screenshot. */
 const SHAPES = [
-  ['perfil', 'lattice'],
+  ['profile', 'lattice'],
   ['arquimea', 'globe'],
-  ['ia', 'orbit'],
+  ['ai', 'orbit'],
   ['orderflow', 'hexagon'],
 ]
 const BROWSERS = [
@@ -36,7 +36,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const executablePath = BROWSERS.find((path) => path && existsSync(path))
 if (!executablePath) {
-  console.error('No encuentro Edge ni Chrome. Indica la ruta con BROWSER_PATH.')
+  console.error('Edge or Chrome not found. Set its path in BROWSER_PATH.')
   process.exit(1)
 }
 
@@ -55,7 +55,7 @@ try {
   const open = (query) => page.goto(`${origin}/?${query}`, { waitUntil: 'networkidle0' })
   const hide = (selectors) => page.addStyleTag({ content: `${selectors} { visibility: hidden !important; }` })
 
-  // Portada a 1600 × 840 (≈1,91:1, la proporción que piden LinkedIn y compañía), en cada idioma.
+  // Opening screen at 1600 × 840 (≈1.91:1, the ratio LinkedIn and others ask for), in each language.
   await page.setViewport({ width: 1600, height: 840 })
   for (const locale of LOCALES) {
     await open(`lang=${locale}`)
@@ -64,10 +64,11 @@ try {
     await page.screenshot({ path: inReadme(`hero-${locale}.jpg`), type: 'jpeg', quality: 88 })
     console.log(`✓ docs/readme/hero-${locale}.jpg`)
   }
-  copyFileSync(inReadme('hero-es.jpg'), inPublic('og.jpg'))
+  // The static page metadata is in English, so the social preview is too.
+  copyFileSync(inReadme('hero-en.jpg'), inPublic('og.jpg'))
   console.log('✓ og.jpg')
 
-  // Las formas, solas: se oculta todo menos la escena y se recorta alrededor de la forma.
+  // The shapes on their own: everything but the scene is hidden and the shot is cropped around the shape.
   await page.setViewport({ width: 1440, height: 900 })
   for (const [section, name] of SHAPES) {
     await open('lang=en')
@@ -80,7 +81,7 @@ try {
     }, section)
     await sleep(5000)
     await hide('main, .header, .rail, .bar, .hud, .veil, .grain')
-    // El recorte va en coordenadas de documento y la escena es fija: hay que sumarle el scroll.
+    // The clip is in document coordinates and the scene is fixed: the scroll offset has to be added.
     const scrollY = await page.evaluate(() => window.scrollY)
     await page.screenshot({
       path: inReadme(`${name}.jpg`),

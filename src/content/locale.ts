@@ -18,7 +18,7 @@ function remembered(): string | null {
 
 export const locale = ref<Locale>(resolveLocale(queryParam('lang'), remembered(), window.navigator.language))
 
-/** El contenido en el idioma activo. */
+/** The content in the active language. */
 export const content = computed(() => contents[locale.value])
 
 export function setLocale(next: Locale): void {
@@ -27,7 +27,7 @@ export function setLocale(next: Locale): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, next)
   } catch {
-    // Sin almacenamiento (modo privado): la elección dura lo que la visita.
+    // No storage (private mode): the choice lasts as long as the visit.
   }
 }
 
